@@ -1,14 +1,22 @@
 'use client'
 
-import React, { useActionState } from 'react'
+import React, { useActionState, useEffect } from 'react'
 import Link from 'next/link'
 import { register } from '@/actions/auth'
+import { toast } from 'react-toastify'
+import SubmitButton from '@/components/SubmitButton'
+
 
 export default function Register() {
     const [state, formAction] = useActionState(register, {})
 
-    console.log(state?.error);
-    
+    useEffect(() => {
+        if (state?.error) {
+            toast.error(state?.error)
+        }
+    }, [state?.error])
+
+
 
     return (
         <div className="max-w-md mx-auto mt-10 p-6 bg-zinc-100 rounded shadow">
@@ -19,38 +27,37 @@ export default function Register() {
                     name="name"
                     placeholder="Username"
                     className="border rounded px-3 py-2"
-                    // required
+                // required
                 />
                 <input
                     type="email"
                     name="email"
                     placeholder="Email"
                     className="border rounded px-3 py-2"
-                    // required
+                // required
                 />
                 <input
                     type="password"
                     name="password"
                     placeholder="Password"
                     className="border rounded px-3 py-2"
-                    // required
+                // required
                 />
                 <input
                     type="password"
-                    name="confirmPassword" 
+                    name="confirmPassword"
                     placeholder="Confirm Password"
                     className="border rounded px-3 py-2"
-                    // required
+                // required
                 />
-                {state?.error && (
+
+                {/* {state?.error && (
                     <div className="text-red-500 text-sm text-center">{state.error}</div>
-                )}
-                <button
-                    type="submit"
-                    className="bg-blue-500 text-white rounded px-4 py-2 hover:bg-blue-600 transition-all duration-300"
-                >
-                    Register
-                </button>
+                )} */}
+
+
+                <SubmitButton title="Register" />
+
                 <div className='flex items-center justify-center gap-3'>
                     <span>Already have an account?</span>
                     <Link href="/auth/login">Log in</Link>

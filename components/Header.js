@@ -13,7 +13,7 @@ export default function Header() {
             </div>
             <div className="flex gap-2 sm:gap-4">
                 <Link href="/auth/register" className="px-3 py-2 rounded bg-blue-500 text-white hover:bg-blue-600 transition-colors text-sm sm:px-4 sm:py-2 sm:text-base">
-                    Log in / sign up
+                    Log in / Register
                 </Link>
                 
             </div>

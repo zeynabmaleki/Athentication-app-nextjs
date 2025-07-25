@@ -1,6 +1,8 @@
 // import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import Header from "@/components/Header";
+import 'react-toastify/dist/ReactToastify.css';
+import Toastify from '@/components/Toastify'
 
 
 // const geistSans = Geist({
@@ -22,8 +24,11 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body>
-        <Header/>
+        <Header />
+
         {children}
+
+        <Toastify />
       </body>
     </html>
   );
