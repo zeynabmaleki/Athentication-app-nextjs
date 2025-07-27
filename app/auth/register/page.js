@@ -5,16 +5,21 @@ import Link from 'next/link'
 import { register } from '@/actions/auth'
 import { toast } from 'react-toastify'
 import SubmitButton from '@/components/SubmitButton'
+import { useRouter } from 'next/navigation'
 
 
 export default function Register() {
+    const router = useRouter()
     const [state, formAction] = useActionState(register, {})
 
     useEffect(() => {
         if (state?.error) {
             toast.error(state?.error)
+        } else if (state?.success) {
+            toast.success(state?.success)
+            router.push("/")
         }
-    }, [state?.error])
+    }, [state])
 
 
 
@@ -27,33 +32,25 @@ export default function Register() {
                     name="name"
                     placeholder="Username"
                     className="border rounded px-3 py-2"
-                // required
                 />
                 <input
                     type="email"
                     name="email"
                     placeholder="Email"
                     className="border rounded px-3 py-2"
-                // required
                 />
                 <input
                     type="password"
                     name="password"
                     placeholder="Password"
                     className="border rounded px-3 py-2"
-                // required
                 />
                 <input
                     type="password"
                     name="confirmPassword"
                     placeholder="Confirm Password"
                     className="border rounded px-3 py-2"
-                // required
                 />
-
-                {/* {state?.error && (
-                    <div className="text-red-500 text-sm text-center">{state.error}</div>
-                )} */}
 
 
                 <SubmitButton title="Register" />
