@@ -3,7 +3,7 @@ import "./globals.css";
 import Header from "@/components/Header";
 import 'react-toastify/dist/ReactToastify.css';
 import Toastify from '@/components/Toastify'
-
+import { AuthProvider } from "@/context/authContext";
 
 // const geistSans = Geist({
 //   variable: "--font-geist-sans",
@@ -24,11 +24,13 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body>
-        <Header />
+        <AuthProvider>
 
-        {children}
+          <Header />
+          {children}
+          <Toastify />
 
-        <Toastify />
+        </AuthProvider>
       </body>
     </html>
   );

@@ -1,7 +1,15 @@
-import React from 'react'
+'use client'
+
+import React, { useContext } from 'react'
 import Link from 'next/link'
+import AuthContext from '@/context/authContext'
 
 export default function Header() {
+
+    const { user } = useContext(AuthContext)
+
+    console.log(user)
+
     return (
         <header className="flex items-center justify-between px-6 py-2 bg-white shadow-md lg:px-20 sm:py-4 sm:px-12">
             <div className="flex items-center gap-4 sm:gap-8">
@@ -12,11 +20,18 @@ export default function Header() {
                 </nav>
             </div>
             <div className="flex gap-2 sm:gap-4">
-                <Link href="/auth/register" className="px-3 py-2 rounded bg-blue-500 text-white hover:bg-blue-600 transition-colors text-sm sm:px-4 sm:py-2 sm:text-base">
-                    Log in / Register
-                </Link>
-                
+                {user ? (
+                    <Link href="/" className="px-3 py-2 rounded bg-blue-500 text-white hover:bg-blue-600 transition-colors text-sm sm:px-4 sm:py-2 sm:text-base">
+                        {user.name}
+                    </Link>
+                ) : (
+                    <Link href="/auth/login" className="px-3 py-2 rounded bg-blue-500 text-white hover:bg-blue-600 transition-colors text-sm sm:px-4 sm:py-2 sm:text-base">
+                        Log in / Register
+                    </Link>
+                )}
+
+
             </div>
-        </header>
+        </header >
     )
 }

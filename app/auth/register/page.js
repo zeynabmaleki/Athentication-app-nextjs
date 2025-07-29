@@ -9,6 +9,7 @@ import { useRouter } from 'next/navigation'
 
 
 export default function Register() {
+
     const router = useRouter()
     const [state, formAction] = useActionState(register, {})
 
@@ -17,7 +18,7 @@ export default function Register() {
             toast.error(state?.error)
         } else if (state?.success) {
             toast.success(state?.success)
-            router.push("/")
+            router.push("/auth/login")
         }
     }, [state])
 
