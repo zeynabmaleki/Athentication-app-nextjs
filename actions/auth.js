@@ -1,8 +1,6 @@
 'use server'
 
-import { json } from "express/lib/response"
-import { resolve } from "styled-jsx/css"
-import {cookies} from "next/headers"
+import { cookies } from "next/headers"
 
 function handleErrors(message) {
 
@@ -82,7 +80,8 @@ export async function login(State, formData) {
 
     if (res.ok) {
 
-        await cookies().set({
+        const cookieStore = await cookies()
+        cookieStore.set({
             name: 'token',
             value: data.token,
             httpOnly: true
@@ -97,4 +96,76 @@ export async function login(State, formData) {
             error: handleErrors(data)
         }
     }
+}
+
+
+export async function me() {
+
+    const cookieStore = await cookies()
+    const token = cookieStore.get('token')
+
+    if (!token) {
+        return {
+            error: "Not authorized"
+        }
+    }
+
+    const res = await fetch('http://127.0.0.1:8000/api/me', {
+        method: 'GET',
+        cache: 'no-store',
+        headers: {
+            'Authorization': `Bearer ${token.value}`,
+            'Accept': "application/json"
+        }
+    })
+
+    const data = await res.json()
+
+    if (res.ok) {
+        return {
+            user: data.user
+        }
+    } else {
+        return {
+            error: "User forbidden"
+        }
+    }
+
+}
+
+
+export async function logout() {
+
+    const cookieStore = await cookies()
+    const token = cookieStore.get('token')
+
+    if (!token) {
+        return {
+            error: "Not authorized"
+        }
+    }
+
+    const res = await fetch('http://127.0.0.1:8000/api/logout', {
+        method: 'POST',
+        cache: 'no-store',
+        headers: {
+            'Authorization': `Bearer ${token.value}`,
+            'Accept': "application/json"
+        }
+    })
+
+    const data = await res.json()
+
+    if (res.ok) {
+        cookieStore.delete('token')
+
+        return {
+            success: "You are logged out"
+        }
+    } else {
+        return {
+            error: handleErrors(data)
+        }
+    }
+
 }

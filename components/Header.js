@@ -3,12 +3,13 @@
 import React, { useContext } from 'react'
 import Link from 'next/link'
 import AuthContext from '@/context/authContext'
+import { useRouter } from 'next/navigation'
+import { logout } from '@/actions/auth'  
 
 export default function Header() {
 
-    const { user } = useContext(AuthContext)
-
-    console.log(user)
+    const { user, logoutContext } = useContext(AuthContext)
+    const router = useRouter()
 
     return (
         <header className="flex items-center justify-between px-6 py-2 bg-white shadow-md lg:px-20 sm:py-4 sm:px-12">
@@ -21,9 +22,20 @@ export default function Header() {
             </div>
             <div className="flex gap-2 sm:gap-4">
                 {user ? (
-                    <Link href="/" className="px-3 py-2 rounded bg-blue-500 text-white hover:bg-blue-600 transition-colors text-sm sm:px-4 sm:py-2 sm:text-base">
-                        {user.name}
-                    </Link>
+                    <>
+                        <span className="px-3 py-2 rounded  text-sm sm:px-4 sm:py-2 sm:text-base">
+                            {user.name}
+                        </span>
+                        <button
+                            onClick={async () => {
+                                await logout()
+                                logoutContext()
+                                router.push("/auth/login")
+                            }}
+                            className='px-3 py-2 rounded bg-blue-500 text-white hover:bg-blue-600 transition-colors text-sm sm:px-4 sm:py-2 sm:text-base'>
+                            log out
+                        </button>
+                    </>
                 ) : (
                     <Link href="/auth/login" className="px-3 py-2 rounded bg-blue-500 text-white hover:bg-blue-600 transition-colors text-sm sm:px-4 sm:py-2 sm:text-base">
                         Log in / Register
