@@ -54,7 +54,9 @@ export default function Register() {
                 />
 
 
-                <SubmitButton title="Register" />
+                <SubmitButton 
+                title="Register"
+                />
 
                 <div className='flex items-center justify-center gap-3'>
                     <span>Already have an account?</span>

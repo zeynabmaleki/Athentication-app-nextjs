@@ -44,7 +44,9 @@ export default function Login() {
                     className="border rounded px-3 py-2"
                 />
 
-                <SubmitButton title="Log in" />
+                <SubmitButton
+                    title="Log in"
+                />
 
 
                 <div className='flex items-center justify-center gap-3'>
