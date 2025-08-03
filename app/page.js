@@ -20,7 +20,7 @@ export default function Home() {
         </h2>
 
         <Link href="/posts" className="px-3 py-2 rounded-4xl bg-indigo-500 text-white hover:bg-indigo-400 transition-colors text-sm sm:px-4 sm:py-2 sm:text-base">
-          See what people have shared!
+          view the posts
         </Link>
       </div>
 
