@@ -11,8 +11,7 @@ export default function SubmitButton({ title }) {
         <button
             type="submit"
             className={`
-                bg-blue-500 text-white rounded px-4 py-2 
-                transition-all duration-300
+                flex w-full justify-center rounded-md bg-indigo-500 px-3 py-1.5 text-sm/6 font-semibold text-white hover:bg-indigo-400 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-500
                 ${pending ? 'opacity-50 cursor-not-allowed' : 'hover:bg-blue-600'}
             `}
             disabled={pending}
