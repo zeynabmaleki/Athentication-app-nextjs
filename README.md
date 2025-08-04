@@ -2,6 +2,8 @@
 
 This is a modern authentication application built with Next.js and React. It provides user registration, login, and protected routes with a clean and responsive UI styled using Tailwind CSS.
 
+> **Note:** The api i usec for this project (`laravel-api` directory) is from [https://webprog.io](https://webprog.io). I only created the Next.js app (`next-auth`) for this project.
+
 ## Features
 
 - User registration with validation
