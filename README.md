@@ -1,5 +1,5 @@
 # Authentication App
-<<<<<<< HEAD
+
 =======
 
 This is a modern authentication application built with Next.js and React. It provides user registration, login, and protected routes with a clean and responsive UI styled using Tailwind CSS.
